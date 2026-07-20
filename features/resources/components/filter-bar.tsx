@@ -33,7 +33,7 @@ const CRITICALITIES = [...CriticalitySchema.options].reverse();
 const ALL_VALUE = "__all__";
 
 const triggerClassName =
-  "flex h-9 w-full items-center justify-between gap-2 rounded-md border border-slate-300 bg-white px-3 text-sm text-slate-900 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600/30 data-[placeholder]:text-slate-400 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100";
+  "flex h-9 w-full min-w-44 items-center justify-between gap-2 rounded-md border border-slate-300 bg-white px-3 text-sm text-slate-900 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600/30 data-[placeholder]:text-slate-400 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100";
 
 const contentClassName =
   "overflow-hidden rounded-md border border-slate-200 bg-white shadow-lg dark:border-slate-700 dark:bg-slate-900";
@@ -60,21 +60,34 @@ function FilterSelect<T extends string>({
 }: FilterSelectProps<T>) {
   return (
     <div className="flex flex-col gap-1.5">
-      <label htmlFor={id} className="text-sm font-medium text-slate-700 dark:text-slate-300">
+      <label
+        htmlFor={id}
+        className="text-sm font-medium text-slate-700 dark:text-slate-300"
+      >
         {label}
       </label>
       <Select.Root
         value={value || ALL_VALUE}
-        onValueChange={(next) => onChange(next === ALL_VALUE ? "" : (next as T))}
+        onValueChange={(next) =>
+          onChange(next === ALL_VALUE ? "" : (next as T))
+        }
       >
         <Select.Trigger id={id} className={triggerClassName}>
           <Select.Value />
           <Select.Icon>
-            <ChevronDown className="h-4 w-4 text-slate-400" aria-hidden="true" />
+            <ChevronDown
+              className="h-4 w-4 text-slate-400"
+              aria-hidden="true"
+            />
           </Select.Icon>
         </Select.Trigger>
         <Select.Portal>
-          <Select.Content position="popper" side="bottom" sideOffset={4} className={contentClassName}>
+          <Select.Content
+            position="popper"
+            side="bottom"
+            sideOffset={4}
+            className={contentClassName}
+          >
             <Select.Viewport className="p-1">
               <Select.Item value={ALL_VALUE} className={itemClassName}>
                 <Select.ItemIndicator className="absolute left-2 inline-flex items-center">
@@ -83,7 +96,11 @@ function FilterSelect<T extends string>({
                 <Select.ItemText>{allLabel}</Select.ItemText>
               </Select.Item>
               {options.map((option) => (
-                <Select.Item key={option} value={option} className={itemClassName}>
+                <Select.Item
+                  key={option}
+                  value={option}
+                  className={itemClassName}
+                >
                   <Select.ItemIndicator className="absolute left-2 inline-flex items-center">
                     <Check className="h-3.5 w-3.5" aria-hidden="true" />
                   </Select.ItemIndicator>

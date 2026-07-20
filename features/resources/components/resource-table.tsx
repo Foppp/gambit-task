@@ -3,12 +3,12 @@
 import { memo } from "react";
 import * as Checkbox from "@radix-ui/react-checkbox";
 import { ArrowDown, ArrowUp, ArrowUpDown, Check } from "lucide-react";
-import type { Criticality, Resource, SortableField, SortOrder } from "@/features/resources/schema";
-
-interface SortState {
-  field: SortableField;
-  order: SortOrder;
-}
+import type {
+  Criticality,
+  Resource,
+  SortableField,
+  SortState,
+} from "@/features/resources/schema";
 
 interface ResourceTableProps {
   resources: Resource[];
@@ -26,10 +26,24 @@ interface SortableHeaderProps {
   onSort: (field: SortableField) => void;
 }
 
-function SortableHeader({ field, label, align = "left", sort, onSort }: SortableHeaderProps) {
+function SortableHeader({
+  field,
+  label,
+  align = "left",
+  sort,
+  onSort,
+}: SortableHeaderProps) {
   const isActive = sort?.field === field;
-  const ariaSort = isActive ? (sort.order === "asc" ? "ascending" : "descending") : "none";
-  const Icon = isActive ? (sort.order === "asc" ? ArrowUp : ArrowDown) : ArrowUpDown;
+  const ariaSort = isActive
+    ? sort.order === "asc"
+      ? "ascending"
+      : "descending"
+    : "none";
+  const Icon = isActive
+    ? sort.order === "asc"
+      ? ArrowUp
+      : ArrowDown
+    : ArrowUpDown;
 
   return (
     <th
@@ -79,7 +93,11 @@ interface ResourceRowProps {
   onToggle: (id: string) => void;
 }
 
-const ResourceRow = memo(function ResourceRow({ resource, checked, onToggle }: ResourceRowProps) {
+const ResourceRow = memo(function ResourceRow({
+  resource,
+  checked,
+  onToggle,
+}: ResourceRowProps) {
   const checkboxId = `resource-checkbox-${resource.id}`;
 
   return (
@@ -99,14 +117,24 @@ const ResourceRow = memo(function ResourceRow({ resource, checked, onToggle }: R
           Select {resource.name}
         </label>
       </td>
-      <td className="px-4 py-3 text-sm font-medium text-slate-900 dark:text-slate-100">{resource.name}</td>
-      <td className="px-4 py-3 text-sm text-slate-600 dark:text-slate-400">{resource.type}</td>
-      <td className="px-4 py-3 text-sm text-slate-600 dark:text-slate-400">{resource.provider}</td>
-      <td className="px-4 py-3 text-sm text-slate-600 dark:text-slate-400">{resource.environment}</td>
+      <td className="px-4 py-3 text-sm font-medium text-slate-900 dark:text-slate-100">
+        {resource.name}
+      </td>
+      <td className="px-4 py-3 text-sm text-slate-600 dark:text-slate-400">
+        {resource.type}
+      </td>
+      <td className="px-4 py-3 text-sm text-slate-600 dark:text-slate-400">
+        {resource.provider}
+      </td>
+      <td className="px-4 py-3 text-sm text-slate-600 dark:text-slate-400">
+        {resource.environment}
+      </td>
       <td className="px-4 py-3">
         <CriticalityBadge criticality={resource.criticality} />
       </td>
-      <td className="px-4 py-3 text-sm text-slate-600 dark:text-slate-400">{resource.owner}</td>
+      <td className="px-4 py-3 text-sm text-slate-600 dark:text-slate-400">
+        {resource.owner}
+      </td>
       <td className="px-4 py-3 text-sm text-slate-600 dark:text-slate-400">
         <div className="flex flex-wrap gap-1">
           {resource.tags.map((tag) => (
@@ -119,12 +147,20 @@ const ResourceRow = memo(function ResourceRow({ resource, checked, onToggle }: R
           ))}
         </div>
       </td>
-      <td className="px-4 py-3 text-right text-sm text-slate-600 dark:text-slate-400">{resource.openIssues}</td>
+      <td className="px-4 py-3 text-right text-sm text-slate-600 dark:text-slate-400">
+        {resource.openIssues}
+      </td>
     </tr>
   );
 });
 
-export function ResourceTable({ resources, selectedIds, onToggle, sort, onSort }: ResourceTableProps) {
+export function ResourceTable({
+  resources,
+  selectedIds,
+  onToggle,
+  sort,
+  onSort,
+}: ResourceTableProps) {
   if (resources.length === 0) {
     return (
       <div className="rounded-lg border border-slate-200 bg-white p-10 text-center text-sm text-slate-500 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-400">
@@ -135,22 +171,64 @@ export function ResourceTable({ resources, selectedIds, onToggle, sort, onSort }
 
   return (
     <div className="overflow-x-auto rounded-lg border border-slate-200 dark:border-slate-800">
-      <table className="w-full min-w-[960px] border-collapse" aria-label="Cloud resources">
+      <table
+        className="w-full min-w-240 border-collapse"
+        aria-label="Cloud resources"
+      >
         <thead>
           <tr className="border-b border-slate-200 bg-slate-50 dark:border-slate-800 dark:bg-slate-900">
             <th scope="col" className="w-10 px-4 py-2.5">
               <span className="sr-only">Select</span>
             </th>
-            <SortableHeader field="name" label="Name" sort={sort} onSort={onSort} />
-            <SortableHeader field="type" label="Type" sort={sort} onSort={onSort} />
-            <SortableHeader field="provider" label="Provider" sort={sort} onSort={onSort} />
-            <SortableHeader field="environment" label="Environment" sort={sort} onSort={onSort} />
-            <SortableHeader field="criticality" label="Criticality" sort={sort} onSort={onSort} />
-            <SortableHeader field="owner" label="Owner" sort={sort} onSort={onSort} />
-            <th scope="col" className="px-4 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
+            <SortableHeader
+              field="name"
+              label="Name"
+              sort={sort}
+              onSort={onSort}
+            />
+            <SortableHeader
+              field="type"
+              label="Type"
+              sort={sort}
+              onSort={onSort}
+            />
+            <SortableHeader
+              field="provider"
+              label="Provider"
+              sort={sort}
+              onSort={onSort}
+            />
+            <SortableHeader
+              field="environment"
+              label="Environment"
+              sort={sort}
+              onSort={onSort}
+            />
+            <SortableHeader
+              field="criticality"
+              label="Criticality"
+              sort={sort}
+              onSort={onSort}
+            />
+            <SortableHeader
+              field="owner"
+              label="Owner"
+              sort={sort}
+              onSort={onSort}
+            />
+            <th
+              scope="col"
+              className="px-4 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400"
+            >
               Tags
             </th>
-            <SortableHeader field="openIssues" label="Open issues" align="right" sort={sort} onSort={onSort} />
+            <SortableHeader
+              field="openIssues"
+              label="Open issues"
+              align="right"
+              sort={sort}
+              onSort={onSort}
+            />
           </tr>
         </thead>
         <tbody>

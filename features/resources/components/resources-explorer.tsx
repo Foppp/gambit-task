@@ -22,12 +22,8 @@ import type {
   ResourceFilters,
   SortableField,
   SortOrder,
+  SortState,
 } from "@/features/resources/schema";
-
-interface SortState {
-  field: SortableField;
-  order: SortOrder;
-}
 
 function readFiltersFromSearch(search: string): ResourceFilters {
   const params = new URLSearchParams(search);

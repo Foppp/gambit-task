@@ -14,4 +14,3 @@ export const CreateApplicationInputSchema = z.object({
 });
 
 export type Application = z.infer<typeof ApplicationSchema>;
-export type CreateApplicationInput = z.infer<typeof CreateApplicationInputSchema>;

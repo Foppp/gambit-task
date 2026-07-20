@@ -65,7 +65,7 @@ export function Nav() {
           </Dialog.Trigger>
           <Dialog.Portal>
             <Dialog.Overlay className="fixed inset-0 bg-slate-950/40" />
-            <Dialog.Content className="fixed inset-y-0 left-0 flex h-full w-64 flex-col gap-6 bg-white p-4 shadow-lg focus:outline-none dark:bg-slate-950">
+            <Dialog.Content className="fixed inset-0 flex h-full w-full flex-col gap-8 bg-white p-6 focus:outline-none data-[state=closed]:animate-[mobile-nav-slide-out_200ms_ease-in] data-[state=open]:animate-[mobile-nav-slide-in_250ms_ease-out] dark:bg-slate-950">
               <div className="flex items-center justify-between">
                 <Dialog.Title className="text-base font-semibold tracking-tight">Gambit</Dialog.Title>
                 <Dialog.Close asChild>
@@ -74,7 +74,7 @@ export function Nav() {
                     aria-label="Close navigation"
                     className="rounded p-1.5 text-slate-500 hover:bg-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600/40 dark:hover:bg-slate-800"
                   >
-                    <X className="h-4 w-4" />
+                    <X className="h-5 w-5" />
                   </button>
                 </Dialog.Close>
               </div>

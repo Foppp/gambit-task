@@ -43,7 +43,7 @@ export default function RootLayout({
       <body className="flex min-h-full flex-col bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-100 md:flex-row">
         <Providers>
           <Nav />
-          <main className="mx-auto w-full max-w-5xl flex-1 px-6 py-8">
+          <main className="mx-auto w-full max-w-7xl flex-1 px-6 py-8">
             {children}
           </main>
         </Providers>

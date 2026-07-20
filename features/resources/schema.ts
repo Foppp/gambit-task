@@ -49,4 +49,8 @@ export type SortableField = z.infer<typeof SortableFieldSchema>;
 export type SortOrder = z.infer<typeof SortOrderSchema>;
 export type Resource = z.infer<typeof ResourceSchema>;
 export type ResourceFilters = z.infer<typeof ResourceFiltersSchema>;
-export type ResourcesResponse = z.infer<typeof ResourcesResponseSchema>;
+
+export interface SortState {
+  field: SortableField;
+  order: SortOrder;
+}

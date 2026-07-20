@@ -5,7 +5,7 @@ const CRITICALITY_RANK: Record<Criticality, number> = Object.fromEntries(
   CriticalitySchema.options.map((value, index) => [value, index])
 ) as Record<Criticality, number>;
 
-export function matchesResourceFilters(resource: Resource, filters: ResourceFilters): boolean {
+function matchesResourceFilters(resource: Resource, filters: ResourceFilters): boolean {
   if (filters.provider && resource.provider !== filters.provider) return false;
   if (filters.environment && resource.environment !== filters.environment) return false;
   if (filters.criticality && resource.criticality !== filters.criticality) return false;
@@ -29,7 +29,7 @@ function compareResources(a: Resource, b: Resource, sortBy: NonNullable<Resource
   return a[sortBy].localeCompare(b[sortBy]);
 }
 
-export function sortResources(resources: Resource[], filters: ResourceFilters): Resource[] {
+function sortResources(resources: Resource[], filters: ResourceFilters): Resource[] {
   if (!filters.sortBy) return resources;
   const sortBy = filters.sortBy;
   const direction = filters.sortOrder === "desc" ? -1 : 1;
