@@ -22,6 +22,7 @@ interface SortableHeaderProps {
   field: SortableField;
   label: string;
   align?: "left" | "right";
+  widthClassName?: string;
   sort: SortState | null;
   onSort: (field: SortableField) => void;
 }
@@ -30,6 +31,7 @@ function SortableHeader({
   field,
   label,
   align = "left",
+  widthClassName = "",
   sort,
   onSort,
 }: SortableHeaderProps) {
@@ -49,7 +51,7 @@ function SortableHeader({
     <th
       scope="col"
       aria-sort={ariaSort}
-      className={`px-4 py-2.5 text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400 ${
+      className={`px-4 py-2.5 text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400 ${widthClassName} ${
         align === "right" ? "text-right" : "text-left"
       }`}
     >
@@ -117,10 +119,10 @@ const ResourceRow = memo(function ResourceRow({
           Select {resource.name}
         </label>
       </td>
-      <td className="px-4 py-3 text-sm font-medium text-slate-900 dark:text-slate-100">
+      <td className="min-w-44 px-4 py-3 text-sm font-medium text-slate-900 dark:text-slate-100">
         {resource.name}
       </td>
-      <td className="px-4 py-3 text-sm text-slate-600 dark:text-slate-400">
+      <td className="min-w-40 px-4 py-3 text-sm text-slate-600 dark:text-slate-400">
         {resource.type}
       </td>
       <td className="px-4 py-3 text-sm text-slate-600 dark:text-slate-400">
@@ -135,7 +137,7 @@ const ResourceRow = memo(function ResourceRow({
       <td className="px-4 py-3 text-sm text-slate-600 dark:text-slate-400">
         {resource.owner}
       </td>
-      <td className="px-4 py-3 text-sm text-slate-600 dark:text-slate-400">
+      <td className="min-w-40 px-4 py-3 text-sm text-slate-600 dark:text-slate-400">
         <div className="flex flex-wrap gap-1">
           {resource.tags.map((tag) => (
             <span
@@ -183,12 +185,14 @@ export function ResourceTable({
             <SortableHeader
               field="name"
               label="Name"
+              widthClassName="min-w-44"
               sort={sort}
               onSort={onSort}
             />
             <SortableHeader
               field="type"
               label="Type"
+              widthClassName="min-w-40"
               sort={sort}
               onSort={onSort}
             />
@@ -218,7 +222,7 @@ export function ResourceTable({
             />
             <th
               scope="col"
-              className="px-4 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400"
+              className="min-w-40 px-4 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400"
             >
               Tags
             </th>

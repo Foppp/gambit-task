@@ -1,5 +1,10 @@
-import { ApplicationGraphSkeleton } from "@/features/applications/components/application-graph-skeleton";
+import { Loader2 } from "lucide-react";
 
 export default function Loading() {
-  return <ApplicationGraphSkeleton />;
+  return (
+    <Loader2
+      className="h-8 w-8 animate-spin mx-auto mt-32"
+      aria-hidden="true"
+    />
+  );
 }

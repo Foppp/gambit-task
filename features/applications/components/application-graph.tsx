@@ -1,5 +1,7 @@
 "use client";
 
+import { ArrowLeft } from "lucide-react";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { useApplications } from "@/features/applications/provider";
 import { useResources } from "@/features/resources/api/use-resources";
@@ -39,7 +41,11 @@ function spokePosition(index: number, count: number) {
 
 function spokeLabelLayout(position: { x: number; y: number }) {
   const textAnchor: "end" | "start" | "middle" =
-    position.x < CENTER - 10 ? "end" : position.x > CENTER + 10 ? "start" : "middle";
+    position.x < CENTER - 10
+      ? "end"
+      : position.x > CENTER + 10
+        ? "start"
+        : "middle";
   const above = position.y < CENTER;
   return {
     textAnchor,
@@ -48,7 +54,13 @@ function spokeLabelLayout(position: { x: number; y: number }) {
   };
 }
 
-function HubGraph({ name, resources }: { name: string; resources: Resource[] }) {
+function HubGraph({
+  name,
+  resources,
+}: {
+  name: string;
+  resources: Resource[];
+}) {
   if (resources.length === 0) {
     return (
       <div className="flex items-center justify-center rounded-lg border border-slate-200 bg-white p-10 text-sm text-slate-500 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-400">
@@ -79,7 +91,12 @@ function HubGraph({ name, resources }: { name: string; resources: Resource[] }) 
         );
       })}
 
-      <circle cx={CENTER} cy={CENTER} r={HUB_NODE_RADIUS} className="fill-blue-600" />
+      <circle
+        cx={CENTER}
+        cy={CENTER}
+        r={HUB_NODE_RADIUS}
+        className="fill-blue-600"
+      />
       <text
         x={CENTER}
         y={CENTER + HUB_NODE_RADIUS + 17}
@@ -132,14 +149,27 @@ export function ApplicationGraph({ applicationId }: ApplicationGraphProps) {
   }
 
   const { data } = useResources({});
-  const memberResources = data.data.filter((resource) => application.resourceIds.includes(resource.id));
+  const memberResources = data.data.filter((resource) =>
+    application.resourceIds.includes(resource.id),
+  );
 
   return (
     <div className="flex flex-col gap-8">
       <div>
-        <h1 className="text-2xl font-semibold tracking-tight">{application.name}</h1>
+        <Link
+          href="/applications"
+          className="mb-2 inline-flex items-center gap-1.5 text-sm font-medium text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100"
+        >
+          <ArrowLeft className="h-4 w-4" aria-hidden="true" />
+          Applications
+        </Link>
+        <h1 className="text-2xl font-semibold tracking-tight">
+          {application.name}
+        </h1>
         {application.description ? (
-          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">{application.description}</p>
+          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+            {application.description}
+          </p>
         ) : null}
       </div>
 
@@ -156,9 +186,12 @@ export function ApplicationGraph({ applicationId }: ApplicationGraphProps) {
               className="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-slate-200 bg-white px-4 py-3 dark:border-slate-800 dark:bg-slate-950"
             >
               <div className="flex flex-col">
-                <span className="text-sm font-medium text-slate-900 dark:text-slate-100">{resource.name}</span>
+                <span className="text-sm font-medium text-slate-900 dark:text-slate-100">
+                  {resource.name}
+                </span>
                 <span className="text-xs text-slate-500 dark:text-slate-400">
-                  {resource.type} · {resource.provider} · {resource.region} · {resource.owner}
+                  {resource.type} · {resource.provider} · {resource.region} ·{" "}
+                  {resource.owner}
                 </span>
               </div>
               <div className="flex items-center gap-3">
@@ -168,7 +201,8 @@ export function ApplicationGraph({ applicationId }: ApplicationGraphProps) {
                   {resource.criticality}
                 </span>
                 <span className="text-xs text-slate-500 dark:text-slate-400">
-                  {resource.openIssues} open issue{resource.openIssues === 1 ? "" : "s"}
+                  {resource.openIssues} open issue
+                  {resource.openIssues === 1 ? "" : "s"}
                 </span>
               </div>
             </li>
