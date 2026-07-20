@@ -11,7 +11,12 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## What was built
 
-`/` lets you browse, search, filter, and sort the mock resource set (served through a real `/api/resources` HTTP API), with filters and sort synced to the URL so a view can be bookmarked, shared, or refreshed without losing state. Selecting resources and clicking "Create application" opens a dialog that groups them into a new Application, with a success screen linking straight to it. `/applications` lists everything created so far, and `/applications/[id]` visualizes one as a hub-and-spoke graph. Navigation is a sidebar on desktop and a full-screen animated menu on mobile.
+- **Browse resources** — a searchable, filterable table of all cloud resources (name, type, provider, region, environment, criticality, owner, tags, open issues).
+- **Search and filter** — search by name, filter by provider, environment, and criticality, all reflected in the URL.
+- **Select and group** — select multiple resources via checkboxes and group them into a new, named Application (with an optional description).
+- **List Applications** — view every Application created during the session, with its resource count.
+- **Visualize an Application** — a simple SVG hub-and-spoke graph showing an Application at the center connected to each of its member resources, color-coded by criticality.
+- **Tests** — a small, focused suite (`npm run test`): unit tests for the Applications reducer and integration tests.
 
 ## What's next
 
